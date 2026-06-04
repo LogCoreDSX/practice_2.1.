@@ -4,7 +4,7 @@ while True:
     print("--Begin program--")
     print(voidstr)
     try:
-        with open('result/student.txt', 'r', encoding='utf-8') as file:
+        with open('resource/student.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 line = line.strip()
                 if not line:
@@ -20,7 +20,7 @@ while True:
         print(f"Error. File NOT FOUND. Error : {e}")
         print("--End prorgam--")
         exit()
-    with open('result/result.txt', 'w', encoding='utf-8') as file2:
+    with open('resource/result.txt', 'w', encoding='utf-8') as file2:
         for name, avg in students.items():
             if avg > 4.0:
                 file2.write(f"{name}: {avg}\n")

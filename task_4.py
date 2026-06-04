@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 
-log_filename = f'calculator_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
+log_filename = f'resource/calculator_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log'
 
 #Функция проверки и ввода
 def true_number(mode):
@@ -101,7 +101,7 @@ def log_update(mode_log, final_num):
     global log_filename
     if mode_log == 1:
         with open(log_filename, 'w', encoding ='utf-8') as file1,\
-            open ('result/calculator.log', 'w', encoding ='utf-8') as file2:
+            open ('resource/calculator.log', 'w', encoding ='utf-8') as file2:
             if file1.tell() and file2.tell() == 0:
                 file1.write("---History log file----\n")
                 file2.write("---History log file----\n")
@@ -112,7 +112,7 @@ def log_update(mode_log, final_num):
                 file2.write(f"{i+1} : {key} ---- {value}\n")
     elif mode_log == 0:
         with open(log_filename, 'w', encoding='utf-8') as file1, \
-            open ('calculator.log', 'w', encoding ='utf-8') as file2:
+            open ('resource/calculator.log', 'w', encoding ='utf-8') as file2:
             file1.write("--- History log file ----")
             file2.write("--- History log file ----")
             for i in range(4):
@@ -247,7 +247,7 @@ while True:
                     os.startfile(path_log)
                 else:
                     folder_log = os.path.dirname(os.path.abspath(__file__))
-                    path_log = os.path.join(folder_log, 'calculator.log')
+                    path_log = os.path.join(folder_log, 'resource/calculator.log')
                     os.startfile(path_log)
             except(FileNotFoundError) as e:
                print("Error. File NOT FOUND.\n Create file select mode : 0-4")

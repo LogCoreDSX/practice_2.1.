@@ -15,7 +15,7 @@ while True :
             print("ONLY range max 64 \n Count string = 64")
             str_count = 64
         print(voidstr)
-        with open('result/text1.txt', 'a', encoding = 'utf-8') as file1:
+        with open('resource/text1.txt', 'a', encoding = 'utf-8') as file1:
             for i in range(str_count):
                 input1 = input(f"String {i + 1} : ")
                 while True:
@@ -27,7 +27,7 @@ while True :
                         break
                 file1.write(input1 + "\n")
                 list1.append(input1)
-        with open('text1.txt', 'r', encoding = 'utf-8') as file1:
+        with open('resource/text1.txt', 'r', encoding = 'utf-8') as file1:
             str_txt = file1.read()
             str_word = str_txt.split()
     except ValueError as e:

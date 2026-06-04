@@ -1,6 +1,5 @@
 import csv
 
-
 def say(say_param):
     if say_param == "void":
         print(" ")
@@ -159,7 +158,7 @@ def view_products(products):
 #Главная часть
 say("start")
 say("say")
-filename_main = "result/products.csv"
+filename_main = "resource/products.csv"
 products_main = read_csv(filename_main)
 while True:
     say("void")

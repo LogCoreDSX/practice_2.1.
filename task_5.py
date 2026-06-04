@@ -78,12 +78,16 @@ def create_book(my_book, lib_main):
 def generate_id(my_book, lib_main):
     while True:
         new_id = random.randint(1000, 9999)
-        all_books = my_book + lib_main
         id_exists = False
-        for book in all_books:
+        for book in my_book:
             if book["id_book"] == new_id:
                 id_exists = True
                 break
+        if not id_exists:
+            for book in lib_main:
+                if book["id_book"] == new_id:
+                    id_exists = True
+                    break
         if not id_exists:
             return new_id
 
@@ -220,7 +224,7 @@ def visible_my_book(my_book):
 #Функция создание доступных книг из my_book[]
 def create_available_books_file(my_book):
     try:
-        with open('result/available_books.txt', 'w', encoding='utf-8') as file:
+        with open('resource/available_books.txt', 'w', encoding='utf-8') as file:
             if my_book:
                 file.write("=== BOOKS AVAILABLE TO ADD TO LIBRARY ===\n")
                 file.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
@@ -243,7 +247,7 @@ def create_available_books_file(my_book):
         print("\n" + "=" * 50)
         print("FILE CONTENTS:")
         print("=" * 50)
-        with open('result/available_books.txt', 'r', encoding='utf-8') as file:
+        with open('resource/available_books.txt', 'r', encoding='utf-8') as file:
             print(file.read())
     except FileNotFoundError as e:
         say("notfile")
@@ -292,8 +296,8 @@ while True:
         continue
     match select_mode:
         case 0:
-            data_book = create_book(last_id, my_book, lib_main)
-            my_book, last_id = data_book
+            # data_book =
+            my_book, last_id = create_book(my_book,lib_main)
         case 1:
             if my_book == []:
                 print("<No book(s)>")
@@ -379,7 +383,7 @@ while True:
                     if select_mode == 1:
                         try:
                             folder_log = os.path.dirname(os.path.abspath(__file__))
-                            path_log = os.path.join(folder_log, 'available_books.txt')
+                            path_log = os.path.join(folder_log, 'resource/available_books.txt')
                             os.startfile(path_log)
                             break
                         except(FileNotFoundError) as e:
@@ -410,7 +414,7 @@ while True:
                     json_select = int(input("Mode : "))
                     if json_select == 0:
                         if lib_main:
-                            with open('result/library.json', 'w', encoding='utf-8') as f:
+                            with open('resource/library.json', 'w', encoding='utf-8') as f:
                                 json.dump(lib_main, f, ensure_ascii=False, indent=4)
                                 say("void")
                                 print("<Library saved to JSON file>")
@@ -423,7 +427,7 @@ while True:
                             say("void")
                     elif json_select == 1:
                         try:
-                            with open('result/library.json', 'r', encoding='utf-8') as f:
+                            with open('resource/library.json', 'r', encoding='utf-8') as f:
                                 lib_main = json.load(f)
                                 if lib_main:
                                     last_id = max(book['id_book'] for book in lib_main)
